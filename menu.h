@@ -5,7 +5,7 @@
 #include <string>
 class Menu {
 private:
-  enum screen { MAIN = 1, BOOKS = 2, ADD = 3, QUIT = 4 };
+  enum screen { MAIN = 1, BOOKS = 2, ADD = 3, RECORD = 4, QUIT = 5 };
   screen option;
   bool exit;
   User user;
@@ -39,25 +39,33 @@ public:
         setOption(MAIN);
         break;
 
+      case RECORD:
+        clearScreen();
+        printRecord();
+
       case QUIT:
         exit = true;
         break;
       }
     }
   }
+
   void printMain() {
     std::cout << "Main Menu\n";
     std::cout << "---------\n";
     std::cout << "(1) main menu\n";
     std::cout << "(2) print your library\n";
     std::cout << "(3) add book\n";
-    std::cout << "(4) exit\n";
+    std::cout << "(4) show records\n";
+    std::cout << "(5) exit\n";
   }
+
   void printBooks() {
     std::cout << "Your Lybrary\n";
     std::cout << "------------\n";
     user.printBooks();
   }
+
   void addBooks() {
     std::cin.ignore();
     std::string naslov, avtor;
@@ -70,15 +78,15 @@ public:
 
     user.addBook(naslov, avtor);
   }
-  void clearScreen() { system("clear"); }
+
   void select() {
     char input;
     while (true) {
       std::cin >> input;
-      if (input < '5' && input > '0')
+      if (input < '6' && input > '0')
         break;
       else
-        std::cout << "option 1-4\n";
+        std::cout << "error: option 1-4\n";
     }
 
     if (input == '1')
@@ -90,8 +98,17 @@ public:
     if (input == '3')
       setOption(ADD);
 
-    if (input == '4')
+    if(input == '4')
+        setOption(RECORD);
+
+    if (input == '5')
       setOption(QUIT);
   }
+
+  void printRecord(){
+      user.getRecords();
+  }
+
   void setOption(screen option) { this->option = option; }
+  void clearScreen() { system("cls"); }
 };
