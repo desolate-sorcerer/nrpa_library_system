@@ -1,0 +1,9 @@
+id: 1
+	naslov: hlapci
+	avtor: cankar
+id: 1
+	naslov: hlapci
+	avtor: cankar
+id: 1
+	naslov: tour of c++
+	avtor: Bjorne Stroustrup

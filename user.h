@@ -1,11 +1,11 @@
 #pragma once
 #include "book.h"
 #include "record.h"
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <string>
-#include <fstream>
-class User:public Record{
+class User : public Record {
 private:
   std::string name;
   Book *root;
@@ -34,13 +34,13 @@ public:
       new_book->setId(1);
       root = new_book;
     } else {
-        Book *temp = root;
-        while (temp->getNext() != nullptr) {
-            temp = temp->getNext();
-        }
-        temp->setNext(new_book);
-        new_book->setPrev(temp);
-        new_book->setId(temp->getId() + 1);
+      Book *temp = root;
+      while (temp->getNext() != nullptr) {
+        temp = temp->getNext();
+      }
+      temp->setNext(new_book);
+      new_book->setPrev(temp);
+      new_book->setId(temp->getId() + 1);
     }
     addRecord(new_book);
   }
@@ -60,7 +60,5 @@ public:
     }
   }
 
-  void getRecords(){
-      readReecord();
-  }
+  void getRecords() { readRecord(); }
 };

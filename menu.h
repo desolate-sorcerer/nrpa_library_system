@@ -5,7 +5,7 @@
 #include <string>
 class Menu {
 private:
-  enum screen { MAIN = 1, BOOKS = 2, ADD = 3, RECORD = 4, QUIT = 5 };
+  enum screen { MAIN, BOOKS, ADD, RECORD, QUIT };
   screen option;
   bool exit;
   User user;
@@ -42,6 +42,8 @@ public:
       case RECORD:
         clearScreen();
         printRecord();
+        select();
+        break;
 
       case QUIT:
         exit = true;
@@ -83,32 +85,33 @@ public:
     char input;
     while (true) {
       std::cin >> input;
-      if (input < '6' && input > '0')
+      if (input >= '1' && input <= '5')
         break;
       else
-        std::cout << "error: option 1-4\n";
+        std::cout << "error: option 1-5\n";
     }
 
-    if (input == '1')
+    switch (input) {
+    case '1':
       setOption(MAIN);
-
-    if (input == '2')
+      break;
+    case '2':
       setOption(BOOKS);
-
-    if (input == '3')
+      break;
+    case '3':
       setOption(ADD);
-
-    if(input == '4')
-        setOption(RECORD);
-
-    if (input == '5')
+      break;
+    case '4':
+      setOption(RECORD);
+      break;
+    case '5':
       setOption(QUIT);
+      break;
+    }
   }
 
-  void printRecord(){
-      user.getRecords();
-  }
+  void printRecord() { user.getRecords(); }
 
   void setOption(screen option) { this->option = option; }
-  void clearScreen() { system("cls"); }
+  void clearScreen() { system("clear"); }
 };
